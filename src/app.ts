@@ -2,10 +2,16 @@ import 'dotenv/config'
 import { Telegraf } from 'telegraf'
 import { config } from './config';
 import { initDB } from './connect';
+import { setupBot } from './bot';
 
 (async () => {
-  const bot = new Telegraf(config.token);
-  console.log(bot);
-  const db_connect = await initDB(config);
-  console.log(db_connect);
+  try {
+    const bot = new Telegraf(config.token);
+    await initDB(config);
+    setupBot(bot);
+    bot.launch();
+    console.log('Bot started successfully.');
+  } catch (error) {
+    console.error('Failed to start the bot:', error);
+  }
 })()
