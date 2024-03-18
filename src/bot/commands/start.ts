@@ -1,5 +1,6 @@
 import { MyBot, MyContext } from '../telegraf-context';
 import User from '../../models/user';
+import { StateMachine } from '../state-machine/state-machine';
 
 export const startCommand = (bot: MyBot) => {
   bot.start(async (ctx: MyContext) => {
@@ -10,6 +11,10 @@ export const startCommand = (bot: MyBot) => {
     const text = ctx.message.text;
     const { state } = ctx.session;
 
+    const stateMachine = new StateMachine(ctx);
+    await stateMachine.doAction(state);
+    return stateMachine.doReply();
+/*
     switch (state) {
       case 'ASK_NAME':
         ctx.session.name = text;
@@ -40,6 +45,7 @@ export const startCommand = (bot: MyBot) => {
       default:
         return ctx.reply('I\'m not sure what you want to do.');
     }
+    */
   });
 
   const saveUser = async (ctx: MyContext) => {
