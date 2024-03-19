@@ -1,4 +1,3 @@
-import { MyContext } from '../telegraf-context';
 import User from '../../models/user';
 
 export class StateMachine {
