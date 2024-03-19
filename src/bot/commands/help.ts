@@ -1,5 +1,5 @@
-import { MyBot, MyContext } from '../telegraf-context'
+import { Bot, BotContext } from '../telegraf-context'
 
-export const helpCommand = (bot: MyBot) => {
-  bot.help((ctx: MyContext) => ctx.reply('List of available commands: /start, /help, /randomLetter'));
+export const helpCommand = (bot: Bot) => {
+  bot.help((ctx: BotContext) => ctx.reply('List of available commands: /start, /help, /randomLetter'));
 };

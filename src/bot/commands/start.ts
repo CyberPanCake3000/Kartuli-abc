@@ -1,9 +1,9 @@
-import { MyBot, MyContext } from '../telegraf-context';
+import { Bot, BotContext } from '../telegraf-context';
 import User from '../../models/user';
 import { StateMachine } from '../state-machine/state-machine';
 
-export const startCommand = (bot: MyBot) => {
-  bot.start(async (ctx: MyContext) => {
+export const startCommand = (bot: Bot) => {
+  bot.start(async (ctx: BotContext) => {
     ctx.session.state = 'ASK_NAME';
     return ctx.reply('Hello! What\'s your name?');
   })
@@ -48,7 +48,7 @@ export const startCommand = (bot: MyBot) => {
     */
   });
 
-  const saveUser = async (ctx: MyContext) => {
+  const saveUser = async (ctx: BotContext) => {
     const { name, lettersCount, notifications, notificationTime } = ctx.session;
 
     if (!ctx.from) {

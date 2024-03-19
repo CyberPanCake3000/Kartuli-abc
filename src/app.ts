@@ -4,11 +4,11 @@ import { config } from './config';
 import { initDB } from './connect';
 import { setupBot } from './bot';
 import LocalSession from 'telegraf-session-local';
-import { MyContext } from './bot/telegraf-context';
+import { BotContext } from './bot/telegraf-context';
 
 (async () => {
   try {
-    const bot = new Telegraf<MyContext>(config.token);
+    const bot = new Telegraf<BotContext>(config.token);
     const localSession = new LocalSession({ database: 'session_db.json' });
     bot.use(localSession.middleware());
     await initDB(config);

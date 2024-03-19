@@ -9,8 +9,8 @@ interface SessionData {
   language?: string;
 }
 
-export interface MyContext extends TelegrafContext {
+export interface BotContext extends TelegrafContext {
   session: SessionData;
 }
 
-export type MyBot = Telegraf<MyContext>;
+export type Bot = Telegraf<BotContext>;
