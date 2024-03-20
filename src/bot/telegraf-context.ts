@@ -9,8 +9,14 @@ interface SessionData {
   language?: string;
 }
 
-export interface BotContext extends TelegrafContext {
+
+export class BotContext extends TelegrafContext {
   session: SessionData;
+
+  constructor(update: any, telegram: any, options: any) {
+    super(update, telegram, options);
+    this.session = {};
+  }
 }
 
-export type Bot = Telegraf<BotContext>;
+
