@@ -39,9 +39,24 @@ export class AskLetters extends State {
   handleInput(ctx: BotContext): void {
     if (ctx.message && 'text' in ctx.message) {
       const amount = ctx.message.text;
-      ctx.reply(`amount ${amount}`);
+      this.bot.changeState(new AskNotifications(this.bot));
+      this.bot.getCurrentState().getGreetMessage(ctx);
     } else {
       ctx.reply("Please, tell me amount of letters to start the registration.");
+    }
+  }
+}
+
+export class AskNotifications extends State {
+  getGreetMessage(ctx: BotContext): void {
+    ctx.reply('do you want to get notifications? yes/no');
+  }
+
+  handleInput(ctx: BotContext): void {
+    if (ctx.message && 'text' in ctx.message) {
+      const answer = ctx.message.text;
+    } else {
+      ctx.reply("Please, tell me about your notification preferences");
     }
   }
 }
