@@ -1,6 +1,7 @@
 import { BotContext } from '../telegraf-context';
-import Bot, { AskName } from '../Bot';
+import Bot from '../Bot';
 import User from '../../models/user';
+import { AskName } from '../states/registration/ask-name';
 
 export const startCommand = (bot: Bot) => {
   bot.start(async (ctx: BotContext) => {
