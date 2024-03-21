@@ -9,6 +9,6 @@ export abstract class State {
     this.bot = bot;
   }
 
-  abstract getGreetMessage(ctx: BotContext): void;
-  abstract handleInput(ctx: BotContext): void;
+  abstract getGreetMessage(ctx: BotContext): Promise<void>;
+  abstract handleInput(ctx: BotContext, options?: { keyboardValue: string }): Promise<void>;
 }
