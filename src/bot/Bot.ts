@@ -10,7 +10,7 @@ export default class Bot extends Telegraf<BotContext> {
   private currentState?: State;
 
   constructor(token: string) {
-    super(token);
+    super(token, { contextType: BotContext });
     const localSession = new LocalSession({ database: 'session_db.json' });
     this.use(localSession.middleware());
     setupCommands(this);
