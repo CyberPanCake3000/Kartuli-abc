@@ -4,7 +4,7 @@ import User from '../../models/user';
 import { AskName } from '../states/registration/ask-name';
 
 export const startCommand = (bot: Bot) => {
-  bot.start(async (ctx: BotContext) => {
+  const startHandler = async (ctx: BotContext) => {
     const id = ctx.from?.id!;
     const user = await User.findOne({ userId: id });
     if (user) {
@@ -21,9 +21,11 @@ export const startCommand = (bot: Bot) => {
       newUser.save();
 
       bot.changeState(new AskName(bot));
-      bot.getCurrentState().getGreetMessage(ctx)
+      await bot.getCurrentState().getGreetMessage(ctx)
     }
-  })
+  }
 
+  bot.start(startHandler)
+  bot.action('start', startHandler);
 };
 

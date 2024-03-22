@@ -14,6 +14,6 @@ export class AskLetters extends State {
     ctx.session.lettersCount = lettersCount;
     await User.updateOne({ userId: id }, { lettersCount });
     this.bot.changeState(new AskNotifications(this.bot));
-    this.bot.getCurrentState().getGreetMessage(ctx);
+    await this.bot.getCurrentState().getGreetMessage(ctx);
   }
 }

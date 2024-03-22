@@ -30,10 +30,13 @@ export class AskNotifications extends State {
     }
 
     await User.updateOne({ userId: id }, { notifications: answer });
+
     await ctx.answerCbQuery();
     await ctx.editMessageText(
       message,
+      Markup.inlineKeyboard([
+        Markup.button.callback('Start the lesson', 'now'),
+      ]),
     );
-
   }
 }
