@@ -5,8 +5,7 @@ interface SessionData {
   name?: string;
   lettersCount?: number;
   notifications?: boolean;
-  notificationTime?: string;
-  language?: string;
+  currentLetters: Set<number>;
 }
 
 
@@ -15,7 +14,9 @@ export class BotContext extends TelegrafContext {
 
   constructor(update: any, telegram: any, options: any) {
     super(update, telegram, options);
-    this.session = {};
+    this.session = {
+      currentLetters: new Set<number>(),
+    };
   }
 }
 
