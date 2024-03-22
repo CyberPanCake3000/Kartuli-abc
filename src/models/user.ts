@@ -13,7 +13,6 @@ export interface IUser extends Document {
 const schema = new mongoose.Schema({
   name: {
     type: String,
-    required: true,
   },
   userId: {
     type: String,

@@ -1,6 +1,7 @@
 import { BotContext } from '../../telegraf-context';
 import { State } from '../base-state';
 import { Markup } from 'telegraf';
+import User from '../../../models/user';
 
 export class AskNotifications extends State {
   async getGreetMessage(ctx: BotContext): Promise<void> {
@@ -13,19 +14,26 @@ export class AskNotifications extends State {
   }
 
   async handleInput(ctx: BotContext, options: { keyboardValue: string }): Promise<void> {
-    const answer = options.keyboardValue;
-    if (answer === 'yes') {
+    const value = options.keyboardValue;
+    const id = ctx.from?.id;
+    let answer;
+    let message = '';
+
+    if (value === 'yes') {
       ctx.session.notifications = true;
-      await ctx.answerCbQuery();
-      await ctx.editMessageText(
-        "Ok! you are setup and ready to learn!",
-      );
-    } else if (answer === 'no') {
+      answer = true;
+      message = "Ok! you are setup and ready to learn!"
+    } else if (value === 'no') {
       ctx.session.notifications = false;
-      await ctx.answerCbQuery();
-      await ctx.editMessageText(
-        "Now we won't bother you with notifications",
-      );
+      answer = false;
+      message = "Now we won't bother you with notifications"
     }
+
+    await User.updateOne({ userId: id }, { notifications: answer });
+    await ctx.answerCbQuery();
+    await ctx.editMessageText(
+      message,
+    );
+
   }
 }

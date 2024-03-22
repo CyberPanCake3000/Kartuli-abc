@@ -1,3 +1,4 @@
+import User from '../../../models/user';
 import { BotContext } from '../../telegraf-context';
 import { State } from '../base-state';
 import { AskLetters } from './ask-letters';
@@ -8,7 +9,10 @@ export class AskName extends State {
   }
 
   async handleInput(ctx: BotContext): Promise<void> {
-    ctx.session.name = ctx.text;
+    const name = ctx.text;
+    ctx.session.name = name;
+    const id = ctx.from?.id;
+    await User.updateOne({userId: id }, { name });
     this.bot.changeState(new AskLetters(this.bot));
     this.bot.getCurrentState().getGreetMessage(ctx);
   }
