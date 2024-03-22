@@ -1,11 +1,13 @@
 import mongoose from 'mongoose';
 import { Document } from 'mongoose';
+import { SessionData } from '../bot/telegraf-context';
 
 export interface IUser extends Document {
   name: string;
-  username: string;
   userId: string;
-  prefereces: string[];
+  lettersCount: number,
+  notifications: boolean,
+  learnedLetters: number[]
 }
 
 const schema = new mongoose.Schema({
@@ -13,20 +15,14 @@ const schema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  username: {
-    type: String,
-    required: true,
-    unique: true,
-  },
   userId: {
     type: String,
     require: true,
     unique: true,
   },
-  preferences: {
-    type: [String],
-    required: true,
-  }
+  lettersCount: Number,
+  notifications: Boolean,
+  learnedLetters: [Number]
 });
 
 const User = mongoose.model<IUser>('User', schema);

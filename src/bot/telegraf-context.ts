@@ -1,6 +1,6 @@
 import { Context as TelegrafContext, Telegraf } from 'telegraf';
 
-interface SessionData {
+export interface SessionData {
   state?: string;
   name?: string;
   lettersCount?: number;
