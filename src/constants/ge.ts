@@ -1,4 +1,4 @@
-interface Letter {
+export interface Letter {
   character: string,
   transcription: string,
   position: number,
