@@ -1,12 +1,12 @@
 import { Letter, letters } from '../../../constants/ge';
 
 export class LettersService {
-  public getRandomLetter(): Letter {
+  public static getRandomLetter(): Letter {
     const randomIndex = Math.floor(Math.random() * letters.length);
     return letters[randomIndex];
   }
 
-  getRandomLetters(count: number): Letter[] {
+  public static getRandomLetters(count: number): Letter[] {
     const randomLetters: Set<Letter> = new Set();
 
     while (randomLetters.size < count) {
