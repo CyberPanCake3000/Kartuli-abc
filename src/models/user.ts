@@ -1,13 +1,12 @@
 import mongoose from 'mongoose';
 import { Document } from 'mongoose';
-import { SessionData } from '../bot/telegraf-context';
 
 export interface IUser extends Document {
   name: string;
   userId: string;
   lettersCount: number,
   notifications: boolean,
-  learnedLetters: number[]
+  learnedLetters: string[]
 }
 
 const schema = new mongoose.Schema({
@@ -21,7 +20,7 @@ const schema = new mongoose.Schema({
   },
   lettersCount: Number,
   notifications: Boolean,
-  learnedLetters: [Number]
+  learnedLetters: [String]
 });
 
 const User = mongoose.model<IUser>('User', schema);

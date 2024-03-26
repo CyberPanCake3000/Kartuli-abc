@@ -20,7 +20,7 @@ export class Intro extends State {
     if (value === 'yes') {
       const user = await User.findOne({ userId: ctx.from?.id });
       if (user) {
-        const randomLetters = LettersService.getRandomLetters(user.lettersCount);
+        const randomLetters = LettersService.getRandomLetters(user.learnedLetters, user.lettersCount);
 
         randomLetters.forEach(letter => {
           this.sendLetter(ctx, letter);

@@ -1,16 +1,18 @@
 import { Letter, letters } from '../../../constants/ge';
 
 export class LettersService {
-  public static getRandomLetter(): Letter {
-    const randomIndex = Math.floor(Math.random() * letters.length);
-    return letters[randomIndex];
+  private static getRandomIndex(availableLetters: Letter[]): number {
+    return Math.floor(Math.random() * availableLetters.length);
   }
 
-  public static getRandomLetters(count: number): Letter[] {
+  public static getRandomLetters(learnedLetters: string[], count: number): Letter[] {
+    const availableLetters = letters.filter(letter => !learnedLetters.includes(letter.character));
+
     const randomLetters: Set<Letter> = new Set();
 
-    while (randomLetters.size < count) {
-      randomLetters.add(this.getRandomLetter());
+    while (randomLetters.size < count && randomLetters.size < availableLetters.length) {
+      const randomIndex = this.getRandomIndex(availableLetters);
+      randomLetters.add(availableLetters[randomIndex]);
     }
 
     return Array.from(randomLetters);
