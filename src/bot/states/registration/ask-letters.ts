@@ -1,9 +1,13 @@
 import User from '../../../models/user';
+import Bot from '../../Bot';
 import { BotContext } from '../../telegraf-context';
 import { State } from '../base-state';
 import { AskNotifications } from './ask-notifications';
 
 export class AskLetters extends State {
+  constructor (bot: Bot) {
+    super(bot, 'ASK_LETTERS');
+  }
   async getGreetMessage(ctx: BotContext): Promise<void> {
     ctx.reply('enter amount');
   }

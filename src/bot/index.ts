@@ -10,12 +10,8 @@ export const setupCommands = (bot: Bot) => {
   randomLetter(bot);
   now(bot);
 
-  bot.action("yes", async ctx => {
-    bot.getCurrentState().handleInput(ctx, { keyboardValue: 'yes' });
-  });
-
-  bot.action("no", async ctx => {
-    bot.getCurrentState().handleInput(ctx, { keyboardValue: 'no' });
-  });
+  bot.action("yes", async ctx => bot.getCurrentState().handleYes(ctx));
+  bot.action("no", async ctx => bot.getCurrentState().handleNo(ctx));
+  bot.action("next", async ctx => bot.getCurrentState().handleInput(ctx));
 
 }

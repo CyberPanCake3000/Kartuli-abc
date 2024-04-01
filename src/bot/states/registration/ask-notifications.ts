@@ -2,8 +2,13 @@ import { BotContext } from '../../telegraf-context';
 import { State } from '../base-state';
 import { Markup } from 'telegraf';
 import User from '../../../models/user';
+import Bot from '../../Bot';
 
 export class AskNotifications extends State {
+  constructor(bot: Bot) {
+    super(bot, 'ASK_NOTIFICATIONS');
+  }
+
   async getGreetMessage(ctx: BotContext): Promise<void> {
     ctx.reply('do you want to receive notifications? yes/no',
       Markup.inlineKeyboard([

@@ -1,9 +1,13 @@
 import User from '../../../models/user';
+import Bot from '../../Bot';
 import { BotContext } from '../../telegraf-context';
 import { State } from '../base-state';
 import { AskLetters } from './ask-letters';
 
 export class AskName extends State {
+  constructor(bot: Bot) {
+    super(bot, 'ASK_NAME');
+  }
   async getGreetMessage(ctx: BotContext): Promise<void> {
     ctx.editMessageText("Please, tell me your name to start the registration.");
   }
@@ -18,6 +22,6 @@ export class AskName extends State {
   }
 
   async exitState() {
-    
+
   }
 }
