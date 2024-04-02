@@ -1,12 +1,18 @@
 import mongoose from 'mongoose';
 import { Document } from 'mongoose';
 
+interface LearnedLetter{
+  character: string,
+  progress: number,
+  practiceCount: number,
+}
+
 export interface IUser extends Document {
   name: string;
   userId: string;
   lettersCount: number,
   notifications: boolean,
-  learnedLetters: string[]
+  learnedLetters: LearnedLetter[]
 }
 
 const schema = new mongoose.Schema({
@@ -20,7 +26,11 @@ const schema = new mongoose.Schema({
   },
   lettersCount: Number,
   notifications: Boolean,
-  learnedLetters: [String]
+  learnedLetters: [{
+    character: String,
+    progress: Number,
+    practiceCount: Number,
+  }]
 });
 
 const User = mongoose.model<IUser>('User', schema);

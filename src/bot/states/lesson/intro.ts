@@ -5,6 +5,8 @@ import User from '../../../models/user';
 import { Letter } from '../../../constants/ge';
 import { Markup } from 'telegraf';
 import Bot from '../../Bot';
+import * as path from 'path';
+import fs = require('fs');
 
 export class Intro extends State {
   private currentLetters: Letter[] = [];
@@ -53,5 +55,8 @@ export class Intro extends State {
     ctx.editMessageText(`${letter.character}`, Markup.inlineKeyboard([
       Markup.button.callback('Next', 'next'),
     ]));
+    const picturePath = path.join(__dirname, '../../../../', letter.picture);
+    const photo = fs.createReadStream(picturePath);
+    ctx.sendPhoto({ source: photo });
   }
 }
