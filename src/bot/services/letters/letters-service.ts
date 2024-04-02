@@ -5,7 +5,7 @@ export class LettersService {
     return Math.floor(Math.random() * availableLetters.length);
   }
 
-  public static getRandomLetters(learnedLetters: string[], count: number): Letter[] {
+  public static getRandomLetters(learnedLetters: Object[], count: number): Letter[] {
     const availableLetters = letters.filter(letter => !learnedLetters.includes(letter.character));
 
     const randomLetters: Set<Letter> = new Set();
