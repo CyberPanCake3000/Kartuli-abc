@@ -1,13 +1,13 @@
 import mongoose from 'mongoose';
 import { Document } from 'mongoose';
 
-interface LearnedLetter{
+export interface LearnedLetter{
   character: string,
   progress: number,
   practiceCount: number,
 }
 
-export interface IUser extends Document {
+export interface User extends Document {
   name: string;
   userId: string;
   lettersCount: number,
@@ -33,6 +33,6 @@ const schema = new mongoose.Schema({
   }]
 });
 
-const User = mongoose.model<IUser>('User', schema);
+const UserModel = mongoose.model<User>('User', schema);
 
-export default User;
+export default UserModel;

@@ -3,7 +3,7 @@ export interface Letter {
   transcription: string,
   position: number,
   description: string,
-  picture: string,
+  pictureUrl: string,
 }
 
 export const letters: Letter[] = [
@@ -13,7 +13,7 @@ export const letters: Letter[] = [
     "position": 1,
     "description": "описание"
   },
-  {
+  { 
     "character": "ბ",
     "transcription": "b",
     "position": 2,
@@ -207,5 +207,5 @@ export const letters: Letter[] = [
   }
 ].map(letter => ({
   ...letter,
-  picture: `/media/pictures/${letter.position}.png`
+  pictureUrl: `media/pictures/${letter.position}.png`
 }));
